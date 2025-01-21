@@ -15,7 +15,7 @@ const $$Astro = createAstro();
 const $$Minimalist = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro, $$props, $$slots);
   Astro2.self = $$Minimalist;
-  const { PDF_VIEW, FORCE_THEME = "" } = Object.assign(__vite_import_meta_env__, {});
+  const { PDF_VIEW, FORCE_THEME = "" } = Object.assign(__vite_import_meta_env__, { FORCE_THEME: process.env.FORCE_THEME });
   const { title, pdfLink, noIndex, description } = Astro2.props.frontmatter;
   const initials = title.split(" ").map(([initial]) => initial.toUpperCase()).slice(0, 2);
   return renderTemplate`<html lang="en"${addAttribute(FORCE_THEME, "class")}> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="favicon.svg"><meta name="generator"${addAttribute(Astro2.generator, "content")}><meta name="description"${addAttribute(description || title, "content")}>${noIndex && renderTemplate`<meta name="robots" content="noindex">`}<title>${title}</title>${renderHead()}</head> <body${addAttribute(!PDF_VIEW ? "bg-indigo-50 dark:bg-slate-900 sm:my-14" : "", "class")}> <div class="container mx-auto flex justify-center"> <article class="minimalist relative"> <div class="absolute top-4 rounded-sm bg-indigo-400 px-4 py-1 sm:left-8 sm:top-12"> <div class="flex h-fit select-none flex-col items-center text-sm font-bold"> ${initials.map((initial) => renderTemplate`<span>${initial}</span>`)} </div> </div> ${!PDF_VIEW && renderTemplate`<div class="not-prose absolute right-4 top-4"> ${renderComponent($$result, "Download", $$Download, { "href": pdfLink })} </div>`} ${renderSlot($$result, $$slots["default"])} </article> </div>  </body> </html>`;
