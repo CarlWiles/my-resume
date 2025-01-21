@@ -12,9 +12,6 @@ export default defineConfig({
   vite: {
     ssr: {
       external: ["svgo"],
-    },
-    webAnalytics: {
-      enabled: true,
-    },
+    }
   },
 });
